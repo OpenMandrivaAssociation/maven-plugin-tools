@@ -1,6 +1,6 @@
 Name:           maven-plugin-tools
 Version:        2.6
-Release:        9
+Release:        11
 Summary:        Maven Plugin Tools
 
 Group:          Development/Java
