@@ -1,6 +1,6 @@
 Name:           maven-plugin-tools
 Version:        2.7
-Release:        4
+Release:        5
 Summary:        Maven Plugin Tools
 
 Group:          Development/Java
@@ -108,7 +108,7 @@ The Maven Plugin Tools Javadoc provides several Javadoc taglets to be
 %package model
 Summary: Maven Plugin Metadata Model
 Group: Development/Java
-Requires: %{name} = %{epoch}:%{version}-%{release}
+Requires: %{name} = %{version}-%{release}
 Requires: %{name}-java
 Obsoletes: maven-shared-plugin-tools-model < 0:%{version}-%{release}
 Provides: maven-shared-plugin-tools-model = 0:%{version}-%{release}
@@ -120,7 +120,7 @@ Metadata model.
 %package -n maven-plugin-plugin
 Summary: Maven Plugin Plugin
 Group: Development/Java
-Requires: %{name} = %{epoch}:%{version}-%{release}
+Requires: %{name} = %{version}-%{release}
 Requires: %{name}-java
 Requires: %{name}-model
 Requires: %{name}-beanshell
