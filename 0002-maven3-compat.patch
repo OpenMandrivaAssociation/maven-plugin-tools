@@ -1,0 +1,98 @@
+diff -Naur maven-plugin-tools-2.7.orig/maven-plugin-plugin/pom.xml maven-plugin-tools-2.7/maven-plugin-plugin/pom.xml
+--- maven-plugin-tools-2.7.orig/maven-plugin-plugin/pom.xml	2011-02-06 00:06:50.000000000 +0100
++++ maven-plugin-tools-2.7/maven-plugin-plugin/pom.xml	2011-08-16 17:02:16.638032080 +0200
+@@ -91,7 +91,7 @@
+       </dependency>
+       <dependency>
+         <groupId>org.apache.maven</groupId>
+-        <artifactId>maven-plugin-descriptor</artifactId>
++        <artifactId>maven-compat</artifactId>
+         <version>${mavenVersion}</version>
+       </dependency>
+ 
+diff -Naur maven-plugin-tools-2.7.orig/maven-plugin-tools-api/pom.xml maven-plugin-tools-2.7/maven-plugin-tools-api/pom.xml
+--- maven-plugin-tools-2.7.orig/maven-plugin-tools-api/pom.xml	2011-08-16 17:01:27.000000000 +0200
++++ maven-plugin-tools-2.7/maven-plugin-tools-api/pom.xml	2011-08-16 17:02:45.310015205 +0200
+@@ -68,7 +68,7 @@
+     </dependency>
+     <dependency>
+       <groupId>org.apache.maven</groupId>
+-      <artifactId>maven-plugin-descriptor</artifactId>
++      <artifactId>maven-compat</artifactId>
+     </dependency>
+ 
+     <!-- plexus -->
+diff -Naur maven-plugin-tools-2.7.orig/maven-plugin-tools-beanshell/pom.xml maven-plugin-tools-2.7/maven-plugin-tools-beanshell/pom.xml
+--- maven-plugin-tools-2.7.orig/maven-plugin-tools-beanshell/pom.xml	2011-02-06 00:06:40.000000000 +0100
++++ maven-plugin-tools-2.7/maven-plugin-tools-beanshell/pom.xml	2011-08-16 17:02:55.997017154 +0200
+@@ -47,7 +47,7 @@
+     </dependency>
+     <dependency>
+       <groupId>org.apache.maven</groupId>
+-      <artifactId>maven-plugin-descriptor</artifactId>
++      <artifactId>maven-compat</artifactId>
+     </dependency>
+ 
+     <!-- misc -->
+diff -Naur maven-plugin-tools-2.7.orig/maven-plugin-tools-java/pom.xml maven-plugin-tools-2.7/maven-plugin-tools-java/pom.xml
+--- maven-plugin-tools-2.7.orig/maven-plugin-tools-java/pom.xml	2011-02-06 00:06:18.000000000 +0100
++++ maven-plugin-tools-2.7/maven-plugin-tools-java/pom.xml	2011-08-16 17:03:08.686999509 +0200
+@@ -53,7 +53,7 @@
+     </dependency>
+     <dependency>
+       <groupId>org.apache.maven</groupId>
+-      <artifactId>maven-plugin-descriptor</artifactId>
++      <artifactId>maven-compat</artifactId>
+     </dependency>
+     <dependency>
+       <groupId>org.apache.maven.plugin-tools</groupId>
+diff -Naur maven-plugin-tools-2.7.orig/maven-plugin-tools-model/pom.xml maven-plugin-tools-2.7/maven-plugin-tools-model/pom.xml
+--- maven-plugin-tools-2.7.orig/maven-plugin-tools-model/pom.xml	2011-02-06 00:06:54.000000000 +0100
++++ maven-plugin-tools-2.7/maven-plugin-tools-model/pom.xml	2011-08-16 17:03:32.990016149 +0200
+@@ -43,7 +43,7 @@
+     <!-- maven -->
+     <dependency>
+       <groupId>org.apache.maven</groupId>
+-      <artifactId>maven-plugin-descriptor</artifactId>
++      <artifactId>maven-compat</artifactId>
+     </dependency>
+ 
+     <!-- plexus -->
+diff -Naur maven-plugin-tools-2.7.orig/pom.xml maven-plugin-tools-2.7/pom.xml
+--- maven-plugin-tools-2.7.orig/pom.xml	2011-02-06 00:06:54.000000000 +0100
++++ maven-plugin-tools-2.7/pom.xml	2011-08-16 17:02:03.997011989 +0200
+@@ -178,8 +178,8 @@
+       </dependency>
+       <dependency>
+         <groupId>org.apache.maven</groupId>
+-        <artifactId>maven-plugin-descriptor</artifactId>
+-        <version>2.0.6</version>
++        <artifactId>maven-compat</artifactId>
++        <version>3.0.2</version>
+       </dependency>
+ 
+       <!-- plexus -->
+diff -Naur maven-plugin-tools-2.7.orig/maven-plugin-tools-ant/pom.xml maven-plugin-tools-2.7/maven-plugin-tools-ant/pom.xml
+--- maven-plugin-tools-2.7.orig/maven-plugin-tools-ant/pom.xml	2011-02-06 00:06:26.000000000 +0100
++++ maven-plugin-tools-2.7/maven-plugin-tools-ant/pom.xml	2011-08-16 17:06:46.864022871 +0200
+@@ -47,7 +47,7 @@
+     </dependency>
+     <dependency>
+       <groupId>org.apache.maven</groupId>
+-      <artifactId>maven-plugin-descriptor</artifactId>
++      <artifactId>maven-compat</artifactId>
+     </dependency>
+     <dependency>
+       <groupId>org.apache.maven.plugin-tools</groupId>
+diff -Naur maven-plugin-tools-2.7.orig/maven-plugin-plugin/pom.xml maven-plugin-tools-2.7/maven-plugin-plugin/pom.xml
+--- maven-plugin-tools-2.7.orig/maven-plugin-plugin/pom.xml	2011-08-16 17:11:13.000000000 +0200
++++ maven-plugin-tools-2.7/maven-plugin-plugin/pom.xml	2011-08-16 17:13:16.834038174 +0200
+@@ -150,7 +150,7 @@
+     </dependency>
+     <dependency>
+       <groupId>org.apache.maven</groupId>
+-      <artifactId>maven-plugin-descriptor</artifactId>
++      <artifactId>maven-compat</artifactId>
+       <version>${mavenVersion}</version>
+     </dependency>
+     <dependency>
