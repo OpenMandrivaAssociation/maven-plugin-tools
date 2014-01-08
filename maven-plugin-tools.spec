@@ -50,8 +50,8 @@ BuildRequires:  mvn(org.codehaus.plexus:plexus-velocity)
 
 
 %description
-The Maven Plugin Tools contains the necessary tools to be able to produce Maven
-Plugins in a variety of languages.
+The Maven Plugin Tools contains the necessary tools to be able to produce
+Maven Plugins in a variety of languages.
 
 %package -n maven-plugin-annotations
 Summary:        Maven Plugin Java 5 Annotations
