@@ -1,7 +1,7 @@
 %{?_javapackages_macros:%_javapackages_macros}
 Name:           maven-plugin-tools
 Version:        3.1
-Release:        14.1%{?dist}
+Release:        20%{?dist}
 Epoch:          0
 Summary:        Maven Plugin Tools
 
@@ -13,49 +13,50 @@ BuildArch:      noarch
 # Fix NullPointerException in MojoClassVisitor.visit()
 # See: rhbz#920042, http://jira.codehaus.org/browse/MPLUGIN-242
 Patch0:         %{name}-rhbz-920042.patch
-
-Patch1:         %{name}-ftbfs.patch
+# Use Maven 3.1.1 APIs
+Patch1:         %{name}-maven-3.1.1.patch
 
 BuildRequires:  maven-local
 BuildRequires:  mvn(asm:asm)
 BuildRequires:  mvn(asm:asm-commons)
 BuildRequires:  mvn(bsh:bsh)
+BuildRequires:  mvn(com.sun:tools)
 BuildRequires:  mvn(com.thoughtworks.qdox:qdox)
 BuildRequires:  mvn(net.sf.jtidy:jtidy)
-BuildRequires:  mvn(org.apache:apache-jar-resource-bundle)
 BuildRequires:  mvn(org.apache.ant:ant)
 BuildRequires:  mvn(org.apache.ant:ant-launcher)
 BuildRequires:  mvn(org.apache.maven.doxia:doxia-sink-api)
 BuildRequires:  mvn(org.apache.maven.doxia:doxia-site-renderer)
-BuildRequires:  mvn(org.apache.maven.reporting:maven-reporting-api)
-BuildRequires:  mvn(org.apache.maven.reporting:maven-reporting-impl)
 BuildRequires:  mvn(org.apache.maven:maven-artifact)
-BuildRequires:  mvn(org.apache.maven:maven-artifact-manager)
+BuildRequires:  mvn(org.apache.maven:maven-compat)
 BuildRequires:  mvn(org.apache.maven:maven-core)
 BuildRequires:  mvn(org.apache.maven:maven-model)
 BuildRequires:  mvn(org.apache.maven:maven-parent)
 BuildRequires:  mvn(org.apache.maven:maven-plugin-api)
-BuildRequires:  mvn(org.apache.maven:maven-plugin-descriptor)
-BuildRequires:  mvn(org.apache.maven:maven-plugin-registry)
-BuildRequires:  mvn(org.apache.maven:maven-project)
 BuildRequires:  mvn(org.apache.maven:maven-repository-metadata)
+BuildRequires:  mvn(org.apache.maven.plugins:maven-enforcer-plugin)
+BuildRequires:  mvn(org.apache.maven.plugins:maven-plugin-plugin)
+BuildRequires:  mvn(org.apache.maven.plugins:maven-source-plugin)
+BuildRequires:  mvn(org.apache.maven.reporting:maven-reporting-api)
+BuildRequires:  mvn(org.apache.maven.reporting:maven-reporting-impl)
 BuildRequires:  mvn(org.apache.velocity:velocity)
+BuildRequires:  mvn(org.codehaus.modello:modello-maven-plugin)
 BuildRequires:  mvn(org.codehaus.plexus:plexus-ant-factory)
 BuildRequires:  mvn(org.codehaus.plexus:plexus-archiver)
 BuildRequires:  mvn(org.codehaus.plexus:plexus-bsh-factory)
 BuildRequires:  mvn(org.codehaus.plexus:plexus-component-annotations)
+BuildRequires:  mvn(org.codehaus.plexus:plexus-component-metadata)
 BuildRequires:  mvn(org.codehaus.plexus:plexus-container-default)
 BuildRequires:  mvn(org.codehaus.plexus:plexus-utils)
 BuildRequires:  mvn(org.codehaus.plexus:plexus-velocity)
 
 
 %description
-The Maven Plugin Tools contains the necessary tools to be able to produce
-Maven Plugins in a variety of languages.
+The Maven Plugin Tools contains the necessary tools to be able to produce Maven
+Plugins in a variety of languages.
 
 %package -n maven-plugin-annotations
 Summary:        Maven Plugin Java 5 Annotations
-Requires:       %{name} = %{epoch}:%{version}-%{release}
 Obsoletes:      maven-plugin-annotations < 0:%{version}-%{release}
 
 %description -n maven-plugin-annotations
@@ -63,7 +64,6 @@ This package contains Java 5 annotations to use in Mojos.
 
 %package -n maven-plugin-plugin
 Summary:        Maven Plugin Plugin
-Requires:       %{name} = %{epoch}:%{version}-%{release}
 Obsoletes:      maven2-plugin-plugin < 0:%{version}-%{release}
 Provides:       maven2-plugin-plugin = 0:%{version}-%{release}
 
@@ -75,14 +75,12 @@ artifact metadata and a generic help goal.
 
 %package annotations
 Summary:        Maven Plugin Tool for Annotations
-Requires:       %{name} = %{epoch}:%{version}-%{release}
 
 %description annotations
 This package provides Java 5 annotation tools for use with Apache Maven.
 
 %package ant
 Summary:        Maven Plugin Tool for Ant
-Requires:       %{name} = %{epoch}:%{version}-%{release}
 Obsoletes:      maven-shared-plugin-tools-ant < 0:%{version}-%{release}
 Provides:       maven-shared-plugin-tools-ant = 0:%{version}-%{release}
 
@@ -91,7 +89,6 @@ Descriptor extractor for plugins written in Ant.
 
 %package api
 Summary:        Maven Plugin Tools APIs
-Requires:       %{name} = %{epoch}:%{version}-%{release}
 Obsoletes:      maven-shared-plugin-tools-api < 0:%{version}-%{release}
 Provides:       maven-shared-plugin-tools-api = 0:%{version}-%{release}
 
@@ -101,7 +98,6 @@ and generate documentation for Maven Plugins.
 
 %package beanshell
 Summary:        Maven Plugin Tool for Beanshell
-Requires:       %{name} = %{epoch}:%{version}-%{release}
 Obsoletes:      maven-shared-plugin-tools-beanshell < 0:%{version}-%{release}
 Provides:       maven-shared-plugin-tools-beanshell = 0:%{version}-%{release}
 
@@ -110,7 +106,6 @@ Descriptor extractor for plugins written in Beanshell.
 
 %package generators
 Summary:        Maven Plugin Tools Generators
-Requires:       %{name} = %{epoch}:%{version}-%{release}
 
 %description generators
 The Maven Plugin Tools Generators provides content generation
@@ -118,7 +113,6 @@ The Maven Plugin Tools Generators provides content generation
 
 %package java
 Summary:        Maven Plugin Tool for Java
-Requires:       %{name} = %{epoch}:%{version}-%{release}
 Obsoletes:      maven-shared-plugin-tools-java < 0:%{version}-%{release}
 Provides:       maven-shared-plugin-tools-java = 0:%{version}-%{release}
 
@@ -129,7 +123,6 @@ Descriptor extractor for plugins written in Java.
 # See comments about "javadocs" subpackage below.
 %package javadoc
 Summary:        Maven Plugin Tools Javadoc
-Requires:       %{name} = %{epoch}:%{version}-%{release}
 
 %description javadoc
 The Maven Plugin Tools Javadoc provides several Javadoc taglets to be used when
@@ -140,7 +133,6 @@ Java API documentation for %{name} is contained in
 
 %package model
 Summary:        Maven Plugin Metadata Model
-Requires:       %{name} = %{epoch}:%{version}-%{release}
 Obsoletes:      maven-shared-plugin-tools-model < 0:%{version}-%{release}
 Provides:       maven-shared-plugin-tools-model = 0:%{version}-%{release}
 
@@ -150,7 +142,6 @@ model.
 
 %package -n maven-script
 Summary:        Maven Script Mojo Support
-Requires:       %{name} = %{epoch}:%{version}-%{release}
 
 %description -n maven-script
 Maven Script Mojo Support lets developer write Maven plugins/goals
@@ -158,7 +149,6 @@ with scripting languages instead of compiled Java.
 
 %package -n maven-script-ant
 Summary:        Maven Ant Mojo Support
-Requires:       maven-script = %{epoch}:%{version}-%{release}
 
 %description -n maven-script-ant
 This package provides %{summary}, which write Maven plugins with
@@ -166,11 +156,10 @@ Ant scripts.
 
 %package -n maven-script-beanshell
 Summary:        Maven Beanshell Mojo Support
-Requires:       maven-script = %{epoch}:%{version}-%{release}
 
 %description -n maven-script-beanshell
-This package provides %{summary}, which write Maven plugins with
-Beanshell scripts.
+This package provides maven banshell mojo support, which write 
+Maven plugins with Beanshell scripts.
 
 # This "javadocs" package violates packaging guidelines as of Sep 6 2012. The
 # subpackage name "javadocs" instead of "javadoc" is intentional. There was a
@@ -191,22 +180,23 @@ API documentation for %{name}.
 # For easier installation
 ln -s maven-script/maven-script-{ant,beanshell} .
 
+# For com.sun:tools use scope "compile" instead of "system"
+%pom_remove_dep com.sun:tools maven-plugin-tools-javadoc
+%pom_add_dep com.sun:tools maven-plugin-tools-javadoc
+
 %pom_xpath_inject "pom:project/pom:properties" "
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>"
 
-# Disable resolution of test artifacts (tests are skipped anyways).
-%mvn_config buildSettings/skipTests true
+# Remove test dependencies because tests are skipped anyways.
+%pom_xpath_remove "pom:dependency[pom:scope='test']"
 
 %build
 %mvn_build -s -f
 
 %install
 %mvn_install
-%if 0%{?fedora}
-%else
-sed -i 's|<version>3.8.2</version>||;' %{buildroot}%{_mavendepmapfragdir}/*.xml
-%endif
+
 
 %files -f .mfiles-maven-plugin-tools
 %dir %{_javadir}/%{name}
@@ -239,10 +229,29 @@ sed -i 's|<version>3.8.2</version>||;' %{buildroot}%{_mavendepmapfragdir}/*.xml
 %files -n maven-script-beanshell -f .mfiles-maven-script-beanshell
 
 %files javadocs -f .mfiles-javadoc
- %doc LICENSE NOTICE
+%doc LICENSE NOTICE
 
 
 %changelog
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0:3.1-20
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
+* Tue Mar 04 2014 Stanislav Ochotnicky <sochotnicky@redhat.com> - 0:3.1-19
+- Use Requires: java-headless rebuild (#1067528)
+
+* Mon Jan 27 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 0:3.1-18
+- Use Maven 3.x APIs
+
+* Fri Jan 10 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 0:3.1-17
+- Remove explicit requires
+- Resolves: rhbz#1051527
+
+* Fri Sep 20 2013 Mikolaj Izdebski <mizdebsk@redhat.com> - 0:3.1-16
+- Disable test dependencies
+
+* Fri Sep 20 2013 Mikolaj Izdebski <mizdebsk@redhat.com> - 0:3.1-15
+- Fix com.sun:tools dependency
+
 * Thu Aug 29 2013 Michal Srb <msrb@redhat.com> - 0:3.1-14
 - Adapt to current guidelines (Resolves: #960526)
 
@@ -369,3 +378,4 @@ sed -i 's|<version>3.8.2</version>||;' %{buildroot}%{_mavendepmapfragdir}/*.xml
 
 * Mon Apr 07 2008 Deepak Bhole <dbhole@redhat.com> - 0:2.1-0jpp.1
 - Initial build
+
