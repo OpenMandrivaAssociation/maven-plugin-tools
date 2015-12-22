@@ -1,8 +1,8 @@
 %{?_javapackages_macros:%_javapackages_macros}
 %global bootstrap 0
 Name:           maven-plugin-tools
-Version:        3.3
-Release:        4.3
+Version:        3.4
+Release:        1.1
 Group:		Development/Java
 Epoch:          0
 Summary:        Maven Plugin Tools
@@ -14,7 +14,7 @@ Source0:        http://repo2.maven.org/maven2/org/apache/maven/plugin-tools/%{na
 Source1:	maven-plugin-plugin-3.3-4.fc22.noarch.rpm
 
 Patch0:         0001-Avoid-duplicate-MOJO-parameters.patch
-Patch1:         0002-Port-to-QDox-2.0.patch
+Patch1:		0002-Deal-with-nulls-from-getComment.patch
 
 BuildRequires:  maven-local
 BuildRequires:  mvn(com.sun:tools)
@@ -180,9 +180,6 @@ API documentation for %{name}.
 %pom_disable_module maven-plugin-plugin
 %endif
 
-# For easier installation
-ln -s maven-script/maven-script-{ant,beanshell} .
-
 # For com.sun:tools use scope "compile" instead of "system"
 %pom_remove_dep com.sun:tools maven-plugin-tools-javadoc
 %pom_add_dep com.sun:tools maven-plugin-tools-javadoc
@@ -203,13 +200,13 @@ ln -s maven-script/maven-script-{ant,beanshell} .
 %pom_change_dep :maven-project :maven-core maven-plugin-tools-annotations
 %pom_change_dep :maven-plugin-descriptor :maven-compat maven-plugin-tools-annotations
 
-%pom_remove_dep :maven-plugin-descriptor maven-plugin-tools-ant
-%pom_change_dep :maven-project :maven-core maven-plugin-tools-ant
+%pom_remove_dep :maven-plugin-descriptor maven-script/maven-plugin-tools-ant
+%pom_change_dep :maven-project :maven-core maven-script/maven-plugin-tools-ant
 
 %pom_remove_dep :maven-plugin-descriptor maven-plugin-tools-api
 %pom_change_dep :maven-project :maven-core maven-plugin-tools-api
 
-%pom_remove_dep :maven-plugin-descriptor maven-plugin-tools-beanshell
+%pom_remove_dep :maven-plugin-descriptor maven-script/maven-plugin-tools-beanshell
 
 %pom_remove_dep :maven-project maven-plugin-tools-generators
 %pom_remove_dep :maven-plugin-descriptor maven-plugin-tools-generators
@@ -217,7 +214,7 @@ ln -s maven-script/maven-script-{ant,beanshell} .
 %pom_change_dep :maven-project :maven-core maven-plugin-tools-java
 %pom_remove_dep :maven-plugin-descriptor maven-plugin-tools-java
 
-%pom_change_dep :maven-plugin-descriptor :maven-plugin-api maven-plugin-tools-model
+%pom_change_dep :maven-plugin-descriptor :maven-plugin-api maven-script/maven-plugin-tools-model
 
 %pom_remove_dep :maven-project maven-script/maven-script-ant
 %pom_remove_dep :maven-plugin-descriptor maven-script/maven-script-ant
