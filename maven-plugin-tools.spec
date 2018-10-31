@@ -2,7 +2,7 @@
 %global bootstrap 0
 Name:           maven-plugin-tools
 Version:        3.4
-Release:        1.1
+Release:        1.2
 Group:		Development/Java
 Epoch:          0
 Summary:        Maven Plugin Tools
