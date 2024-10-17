@@ -7,7 +7,7 @@ Group:		Development/Java
 Epoch:          0
 Summary:        Maven Plugin Tools
 License:        ASL 2.0
-URL:            http://maven.apache.org/plugin-tools/
+URL:            https://maven.apache.org/plugin-tools/
 BuildArch:      noarch
 
 Source0:        http://repo2.maven.org/maven2/org/apache/maven/plugin-tools/%{name}/%{version}/%{name}-%{version}-source-release.zip
