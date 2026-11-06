@@ -213,6 +213,9 @@ def add_skip_descriptor(root):
     plugin = ET.SubElement(plugins, q("plugin"))
     set_text(plugin, "groupId", "org.apache.maven.plugins")
     set_text(plugin, "artifactId", "maven-plugin-plugin")
+    # The maven-plugin lifecycle binds 3.15.1 when this version is absent.
+    # The stage-0 jar is 3.9.0.MBI.
+    set_text(plugin, "version", "3.9.0.MBI")
     configuration = ET.SubElement(plugin, q("configuration"))
     set_text(configuration, "skipDescriptor", "true")
 
