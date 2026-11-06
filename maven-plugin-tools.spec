@@ -21,6 +21,9 @@ BuildRequires:	java-current-devel
 BuildRequires:	javapackages-bootstrap
 # Provided scope still has to be on the compile classpath.
 BuildRequires:	mvn(org.apache.maven:maven-core)
+BuildRequires:	mvn(com.google.inject:guice-parent:pom::)
+BuildRequires:	mvn(org.slf4j:slf4j-parent:pom::)
+BuildRequires:	mvn(org.codehaus.plexus:plexus-containers:pom::)
 BuildRequires:	mvn(org.apache.maven:maven-model)
 BuildRequires:	mvn(org.apache.maven:maven-plugin-api)
 BuildRequires:	mvn(org.apache.maven:maven-artifact)
