@@ -31,6 +31,9 @@ BuildRequires:	mvn(org.apache.maven:maven-parent:pom::)
 BuildRequires:	mvn(org.apache.commons:commons-parent:pom::)
 BuildRequires:	mvn(org.apache.maven.shared:maven-shared-components:pom::)
 BuildRequires:	mvn(org.apache.httpcomponents:httpcomponents-parent:pom::)
+# --bootstrap-root skips the sysjar parent fallback, so this POM has to
+# be a real package. Installed jars parent org.apache:apache:35.MBI.
+BuildRequires:	mvn(org.apache:apache:pom::)
 BuildRequires:	mvn(org.apache.maven:maven-model)
 BuildRequires:	mvn(org.apache.maven:maven-plugin-api)
 BuildRequires:	mvn(org.apache.maven:maven-artifact)
