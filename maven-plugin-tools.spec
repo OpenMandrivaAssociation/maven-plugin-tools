@@ -24,6 +24,13 @@ BuildRequires:	mvn(org.apache.maven:maven-core)
 BuildRequires:	mvn(com.google.inject:guice-parent:pom::)
 BuildRequires:	mvn(org.slf4j:slf4j-parent:pom::)
 BuildRequires:	mvn(org.codehaus.plexus:plexus-containers:pom::)
+# The installed jars still point at these parents. sysjar rewrites the
+# requested version once the parent POM is installed.
+BuildRequires:	mvn(org.codehaus.plexus:plexus:pom::)
+BuildRequires:	mvn(org.apache.maven:maven-parent:pom::)
+BuildRequires:	mvn(org.apache.commons:commons-parent:pom::)
+BuildRequires:	mvn(org.apache.maven.shared:maven-shared-components:pom::)
+BuildRequires:	mvn(org.apache.httpcomponents:httpcomponents-parent:pom::)
 BuildRequires:	mvn(org.apache.maven:maven-model)
 BuildRequires:	mvn(org.apache.maven:maven-plugin-api)
 BuildRequires:	mvn(org.apache.maven:maven-artifact)
