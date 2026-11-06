@@ -73,8 +73,10 @@ not built. Javadoc HTML is cleaned with jsoup.
 mkdir -p plugin-bootstrap/usr/share/javapackages-bootstrap/maven-metadata
 cp -f %{SOURCE1} plugin-bootstrap/usr/share/javapackages-bootstrap/maven-metadata/maven-plugin-plugin.xml
 python - <<'PY'
+import io
 import re
 import shutil
+import zipfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from xml.sax.saxutils import escape
@@ -470,8 +472,33 @@ def write_plugin_xml(plugin_dir, version):
     (dest / "plugin.xml").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def fix_stage0_plugin_jar():
+    # The bootstrap descriptor says maven-plugin-tools. Maven rejects that
+    # for the maven-plugin-plugin coordinate. The corrected jar lives in
+    # the bootstrap root so the absolute bootstrap path is not used.
+    src = Path("/usr/share/javapackages-bootstrap/maven-plugin-plugin.jar")
+    dest = Path("plugin-bootstrap/usr/share/javapackages-bootstrap/maven-plugin-plugin.jar")
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    zin = zipfile.ZipFile(io.BytesIO(src.read_bytes()))
+    name = "META-INF/maven/plugin.xml"
+    xml = zin.read(name).decode("utf-8")
+    old = "<artifactId>maven-plugin-tools</artifactId>"
+    new = "<artifactId>maven-plugin-plugin</artifactId>"
+    if old not in xml:
+        raise SystemExit("bootstrap plugin descriptor has no maven-plugin-tools artifactId")
+    xml = xml.replace(old, new, 1)
+    out = io.BytesIO()
+    with zipfile.ZipFile(out, "w") as zout:
+        for info in zin.infolist():
+            payload = xml.encode("utf-8") if info.filename == name else zin.read(info.filename)
+            zout.writestr(info, payload)
+    zin.close()
+    dest.write_bytes(out.getvalue())
+
+
 def main():
     root = Path(".")
+    fix_stage0_plugin_jar()
     for name in (
         "maven-plugin-annotations",
         "maven-plugin-report-plugin",
