@@ -1,5 +1,5 @@
 Name:		maven-plugin-tools
-Version:	3.15.2
+Version:	3.16.0
 Release:	1
 Summary:	Maven plugin descriptor generator
 Group:		Development/Java
@@ -47,13 +47,14 @@ BuildRequires:	mvn(org.slf4j:slf4j-api)
 BuildRequires:	mvn(javax.inject:javax.inject)
 BuildRequires:	mvn(org.codehaus.plexus:plexus-classworlds)
 BuildRequires:	mvn(org.codehaus.plexus:plexus-utils)
+BuildRequires:	plexus-utils >= 3.6.2
+Requires:	plexus-utils >= 3.6.2
 BuildRequires:	mvn(org.codehaus.plexus:plexus-java)
 BuildRequires:	mvn(org.codehaus.plexus:plexus-archiver)
 BuildRequires:	mvn(org.codehaus.plexus:plexus-velocity)
 BuildRequires:	mvn(org.apache.velocity:velocity-engine-core)
 BuildRequires:	mvn(org.apache.httpcomponents:httpclient)
 BuildRequires:	mvn(org.apache.httpcomponents:httpcore)
-BuildRequires:	mvn(org.apache.maven.wagon:wagon-provider-api)
 BuildRequires:	mvn(org.jsoup:jsoup)
 BuildRequires:	mvn(com.thoughtworks.qdox:qdox)
 BuildRequires:	mvn(org.ow2.asm:asm) >= 9
@@ -66,7 +67,9 @@ BuildSystem:	maven
 Extracts Maven plugin descriptors from Mojo annotations and writes
 plugin.xml. This package ships the api, the generators, the annotations
 extractor and the plugin. The java, ant and beanshell extractors are
-not built. Javadoc HTML is cleaned with jsoup.
+not built. Javadoc HTML is cleaned with jsoup. Source directories
+can be excluded from the descriptor scan, and nonProxyHosts is
+matched without Wagon.
 
 %prep
 %autosetup -n maven-plugin-tools-maven-plugin-tools-%{version}
@@ -154,9 +157,11 @@ def drop_deps(root):
 
 def retarget_managed(root):
     versions = {
-        "plexus-archiver": "4.4.0",
+        "plexus-archiver": "4.15.0",
         "plexus-velocity": "2.2.0",
         "qdox": "2.1.0",
+        "plexus-java": "1.5.0",
+        "plexus-classworlds": "2.8.0",
     }
     for dep in root.iter(q("dependency")):
         artifact = text_of(dep, "artifactId")
@@ -175,7 +180,7 @@ def rewrite_root(path):
     values = {
         "maven3Version": "3.10.0",
         "resolverVersion": "2.0.24",
-        "plexusUtilsVersion": "3.6.0",
+        "plexusUtilsVersion": "3.6.2",
         "asmVersion": "9.11.1",
         "maven.compiler.release": "8",
         "project.build.sourceEncoding": "UTF-8",
@@ -513,7 +518,7 @@ def main():
         module = root / name
         if name == "maven-plugin-plugin":
             skip_descriptor(module / "pom.xml")
-            write_plugin_xml(module, "3.15.2")
+            write_plugin_xml(module, "3.16.0")
         else:
             rewrite_module(module / "pom.xml")
         sisu_index(module)

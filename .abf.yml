@@ -1,2 +1,4 @@
 sources:
+  maven-plugin-tools-3.16.0.tar.gz: 3762ea264dcc8fda6369e8f03e789a677a74d173
+removed_sources:
   maven-plugin-tools-3.15.2.tar.gz: 9dce17641701ebe6cd08d3c5069fe5f84f9ea15e
